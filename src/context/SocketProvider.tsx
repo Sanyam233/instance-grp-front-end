@@ -10,7 +10,8 @@ const SocketProvider = (props: SocketProviderProps) => {
   const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
-    const newSocket = io("http://0.0.0.0:8080");
+    console.log("HEREE", import.meta.env.VITE_BKE_SOCKET_URL);
+    const newSocket = io(import.meta.env.VITE_BKE_SOCKET_URL);
     setSocket(newSocket);
     return () => {
       newSocket.close();
