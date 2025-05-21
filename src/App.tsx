@@ -26,6 +26,10 @@ function App() {
       setZone(data["zone"] || "No N/A");
     });
 
+    socket.on("connect_error", (err) => {
+      console.error("Connection failed hereee:", err.message);
+    });
+
     return () => {
       socket.off("vm_info");
     };

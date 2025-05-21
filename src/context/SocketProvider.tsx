@@ -11,7 +11,12 @@ const SocketProvider = (props: SocketProviderProps) => {
 
   useEffect(() => {
     console.log("HEREE", import.meta.env.VITE_BKE_SOCKET_URL);
-    const newSocket = io(import.meta.env.VITE_BKE_SOCKET_URL);
+    const newSocket = io(import.meta.env.VITE_BKE_SOCKET_URL, {
+      reconnectionAttempts: 5,
+      timeout: 2000,
+      withCredentials: true,
+      transports: ["websocket"],
+    });
     setSocket(newSocket);
     return () => {
       newSocket.close();
@@ -29,6 +34,11 @@ const SocketProvider = (props: SocketProviderProps) => {
     socket.on("disconnect", () => {
       console.log("Client connected!!", socket.id);
     });
+
+    return () => {
+      socket.off("connect");
+      socket.off("disconnect");
+    };
   }, [socket]);
 
   return (
