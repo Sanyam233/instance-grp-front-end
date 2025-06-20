@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 env:
-  PROJECT_ID: second-terra-452922-p7
+  PROJECT_ID: idyllic-physics-462013-m7
   IMAGE_NAME: instance-grp-front-end
 
 jobs:
